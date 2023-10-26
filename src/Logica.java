@@ -10,7 +10,9 @@ public class Logica {
         case '7':
         default:
             System.out.println("Escolha impossível");
-            System.out.println("");
-            break;
-    
-}}}
+            // Chamar menu
+            Mensagens msn = new Mensagens();
+            msn.menu();
+        }
+    }
+}

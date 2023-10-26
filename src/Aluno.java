@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Aluno {
     int numero;
@@ -9,6 +8,7 @@ public class Aluno {
     String morada;
     int telefone;
     String email;
+    ArrayList<Aluno> alunos = new ArrayList<Aluno>();
     public Aluno(int numero, String nome, String curso, int anoMatricula, String morada, int telefone, String email) {
         this.numero = numero;
         this.nome = nome;
@@ -76,23 +76,27 @@ public class Aluno {
         this.email = email;
     }
 
-    Map<Integer, Aluno> alunos = new HashMap<>();
-
-
-}
-
-/*
-Aluno aluno1 = new Aluno(1, "Rui", "Rua A, Cidade X", "DWDM", 2003);
-        alunos.put(aluno1.getId(), aluno1);
-
-    Aluno aluno2 = new Aluno(2, "Jorge", "Rua B, Cidade Y", "DWDM", 2004);
-        alunos.put(aluno2.getId(), aluno2);
-
-    int alunoID = 1;
-    Aluno aluno = alunos.get(alunoID);
-
-        if (aluno != null) {
-        System.out.println(aluno);
-    } else {
+    public void addAluno(Aluno student){
+        alunos.add(student);
     }
- */
+
+    public void delAluno(int numero){
+        for (int i = 0; i < alunos.size(); i++) {
+            if (alunos.get(i).getNumero() == numero){
+                alunos.remove(i);
+                System.out.println("Aluno apagado!");
+                return ;
+            }
+        }
+        System.out.println("Aluno não encontrado!");
+    }
+
+    public Aluno getAlunoPorId(int numero) {
+        for (Aluno aluno : alunos) {
+            if (aluno.getNumero() == numero) {
+                return aluno;
+            }
+        }
+        return null;
+    }
+}
