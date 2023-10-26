@@ -28,6 +28,10 @@ public class Aluno {
         this.numero = numero;
     }
 
+    public float media(int n1, int n2){
+        return (n1+n2)/2;
+    }
+
     public String getNome() {
         return nome;
     }
