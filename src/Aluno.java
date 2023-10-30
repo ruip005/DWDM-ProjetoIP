@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Aluno {
     int numero;
@@ -8,17 +11,24 @@ public class Aluno {
     String morada;
     int telefone;
     String email;
-    ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-    public Aluno(int numero, String nome, String curso, int anoMatricula, String morada, int telefone, String email) {
-        this.numero = numero;
+    float media;
+    float pontos;
+    static ArrayList<Aluno> alunos = new ArrayList<Aluno>(); // Vai criar uma base de dados de alunos
+    //HashMap<Integer, ArrayList<String>> disciplinas = new HashMap<Integer, ArrayList<String>>(); // Vai criar uma base de dados de disciplinas unica para cada aluno (nao posso duplicar o numero)
+    //Map<Integer, Map<String, Float>> notas = new HashMap<>(); // Criar uma base de dados de notas para cada alun
+    public Aluno(String nome, int numero, String curso, int anoMatricula, String morada, int telefone, String email,float media) {
         this.nome = nome;
+        this.numero = numero;
         this.curso = curso;
         this.anoMatricula = anoMatricula;
         this.morada = morada;
         this.telefone = telefone;
         this.email = email;
+        this.media = media;
+        this.pontos = pontos;
         System.out.println("Aluno criado!");
     }
+
 
     public int getNumero() {
         return numero;
@@ -28,8 +38,20 @@ public class Aluno {
         this.numero = numero;
     }
 
-    public float media(int n1, int n2){
-        return (n1+n2)/2;
+    public float getMedia() {
+        return media;
+    }
+
+    public void setMedia(float media) {
+        this.media = media;
+    }
+
+    public float getPontos() {
+        return media*10;
+    }
+
+    public void setPontos(float pontos) {
+        this.pontos = media*10;
     }
 
     public String getNome() {
@@ -80,11 +102,11 @@ public class Aluno {
         this.email = email;
     }
 
-    public void addAluno(Aluno student){
+    public static void addAluno(Aluno student){
         alunos.add(student);
     }
 
-    public void delAluno(int numero){
+    public static void delAluno(int numero){
         for (int i = 0; i < alunos.size(); i++) {
             if (alunos.get(i).getNumero() == numero){
                 alunos.remove(i);
@@ -95,12 +117,16 @@ public class Aluno {
         System.out.println("Aluno não encontrado!");
     }
 
-    public Aluno getAlunoPorId(int numero) {
+    public static Aluno getAluno(int numero) {
         for (Aluno aluno : alunos) {
             if (aluno.getNumero() == numero) {
                 return aluno;
             }
         }
         return null;
+    }
+
+    public static boolean isAlunoEmpty(){
+        return alunos.isEmpty();
     }
 }
