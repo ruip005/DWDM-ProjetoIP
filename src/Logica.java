@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Logica {
     Mensagens msn = new Mensagens();
@@ -59,6 +60,8 @@ public class Logica {
             removeStudent();
             break;
         case '5':
+            showAluno();
+            msn.menu();
             break;
             //Mostar informação de aluno( por numero)
         case '6':
@@ -153,5 +156,34 @@ public class Logica {
         }
         Aluno aluno = Aluno.getAluno(Integer.parseInt(numero));
         msn.printAluno(aluno);
+    }
+    private void showAluno(){
+
+        boolean existe = !Aluno.isAlunoEmpty();
+        if(!existe){
+            System.out.println("Não existe nenhum aluno na base de dados!");
+            msn.menu();
+        } else {
+            System.out.println ("Insira o numero do aluno");
+            String numero = isScan.nextLine();
+            while (!isNum(numero)) {
+                System.out.println("Número inválido, insira novamente:");
+                numero = isScan.nextLine();
+            }
+            Aluno aluno = Aluno.getAluno(Integer.parseInt(numero));
+            if(aluno != null){
+                System.out.println("Número: " + aluno.getNumero());
+                System.out.println("Nome: " + aluno.getNome());
+                System.out.println("Curso: " + aluno.getCurso());
+                System.out.println("Ano de Matrícula: " + aluno.getAnoMatricula());
+                System.out.println("Morada: " + aluno.getMorada());
+                System.out.println("Telefone: " + aluno.getTelefone());
+                System.out.println("Email: " + aluno.getEmail());
+                System.out.println("Media: " + aluno.getMedia());
+                System.out.println("Pontos: " + aluno.getPontos());
+            } else {
+                System.out.println("Numero de aluno não existe");
+            }
+        }
     }
 }

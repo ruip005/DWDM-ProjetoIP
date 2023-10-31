@@ -44,15 +44,7 @@ public class Mensagens {
 
     public static void printAluno(Aluno aluno){
         System.out.println("#######################################");
-        System.out.println("Número: " + aluno.getNumero());
-        System.out.println("Nome: " + aluno.getNome());
-        System.out.println("Curso: " + aluno.getCurso());
-        System.out.println("Ano de Matrícula: " + aluno.getAnoMatricula());
-        System.out.println("Morada: " + aluno.getMorada());
-        System.out.println("Telefone: " + aluno.getTelefone());
-        System.out.println("Email: " + aluno.getEmail());
-        System.out.println("Media: "+ aluno.getMedia());
-        System.out.println("Pontos: "+ aluno.getPontos());
+        alunos.print(aluno);
         System.out.println("#######################################");
     }
 }
