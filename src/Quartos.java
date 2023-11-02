@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 public class Quartos {
     Mensagens msg = new Mensagens();
@@ -96,8 +97,8 @@ public class Quartos {
     }
 
         public void listarQuartos() {
-            System.out.println("Quartos básicos ocupados: " + qtdBasciso());
-            System.out.println("Quartos superiores ocupados: " + qtdSup());
+            System.out.println("Quartos básicos ocupados: " + qtdBasciso() +" /40");
+            System.out.println("Quartos superiores ocupados: " + qtdSup() +" /15");
             msg.menu();
         }
 
@@ -154,8 +155,9 @@ public class Quartos {
                         }
                         break;
 
-                case '*':
-                    break;
+                    case '*':
+                        msg.menu();
+                        break;
 
                     default:
                         System.out.println("Opção inválida. Tente novamente.");
@@ -163,5 +165,54 @@ public class Quartos {
                 }
             } while (caso != '*');
         }
+
+    //Save
+    public void SaveData(){
+        try {
+            File arquivo = new File("rooms.txt");
+            if (!arquivo.exists()) {
+                arquivo.createNewFile();
+            } else {
+                arquivo.delete();
+                arquivo.createNewFile();
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo));
+
+            // Iterar pelo HashMap e escrever os pares chave-valor no arquivo
+            for (Map.Entry<Integer, String> entry : kuartus.entrySet()) {
+                writer.write(entry.getKey() + " " + entry.getValue());
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void LoadData() {
+        try {
+            File arquivo = new File("rooms.txt");
+            if (!arquivo.exists()) {
+                arquivo.createNewFile();
+            }
+
+            BufferedReader reader = new BufferedReader(new FileReader(arquivo));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                int key = Integer.parseInt(parts[0]);
+                String value = parts[1];
+                kuartus.put(key, value);
+            }
+
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     }
 

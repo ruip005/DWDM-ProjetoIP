@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class Mensagens {
     Scanner isScan = new Scanner(System.in);
     public void welcome(){
+        Aluno.LoadData();
+        Quartos.LoadData();
         System.out.println("#######################################");
         System.out.println("##                                   ##");
         System.out.println("##          Bem vindo ao IPV         ##");
@@ -24,6 +26,7 @@ public class Mensagens {
             System.out.println("## 5 - Informação sobre um aluno      ##");
             System.out.println("## 6 - Lista de quartos ocupados      ##");
             System.out.println("## 7 - Atualizar ocupação de quartos  ##");
+            System.out.println("## 8 - Salvar dados                   ##");
             System.out.println("## * - Sair                           ##");
             System.out.println("##                                    ##");
             System.out.println("########################################");

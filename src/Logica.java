@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Logica {
     Mensagens msn = new Mensagens();
     Quartos quartos = new Quartos();
+    SistemaPontos pontos = new SistemaPontos();
     Scanner isScan = new Scanner(System.in);
     public boolean isString(String value){
         return value.matches("[a-zA-Z]+");
@@ -83,14 +84,19 @@ public class Logica {
             //Efetuar Candidatura de residencia (Verificar se pode entrar numa residenecia, e adicionar) ||| feito, adicionarquartos
             break;
         case '3':
+            System.out.println("Insira o número do aluno:");
+            String numeroAluno = isScan.nextLine();
+            while (!isNum(numeroAluno)) {
+                System.out.println("Número inválido, insira novamente:");
+                numeroAluno = isScan.nextLine();
+            }
+            pontos.sistemaPontos(Integer.parseInt(numeroAluno));
             //Atualizar alunos
-            quartos.kuartus.put(1, "Superior");
-            int a = quartos.kuartus.size();
-            System.out.println(a);
             break;
         case '4':
             //Apagar alunos
             removeStudent();
+            msn.menu();
             break;
         case '5':
             showAluno();
@@ -98,6 +104,8 @@ public class Logica {
             break;
             //Mostar informação de aluno( por numero)
         case '6':
+            quartos.listarQuartos();
+            msn.menu();
             break;
             //Lista de ocupação de quartos ||| feito quartosalocados
         case '7':
@@ -105,6 +113,12 @@ public class Logica {
             msn.menu();
             break;
             //Eliminar a ocupação de quartos ||| feito, removerquartos
+        case '8':
+            Aluno.SaveData(Aluno.alunos);
+            quartos.SaveData();
+            msn.menu();
+            break;
+        //Save()
         case '*':
             System.out.println("A sair da App...");
             System.exit(0);
@@ -220,7 +234,8 @@ public class Logica {
                 System.out.println("Telefone: " + aluno.getTelefone());
                 System.out.println("Email: " + aluno.getEmail());
                 System.out.println("Media: " + aluno.getMedia());
-                System.out.println("Pontos: " + aluno.getPontos());
+                System.out.println("Pontos: " + (int) aluno.getPontos());
+                quartos.whoQuarto(Integer.parseInt(numero));
             } else {
                 System.out.println("Número do aluno não existe");
             }

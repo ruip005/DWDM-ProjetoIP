@@ -1,18 +1,19 @@
 import java.util.ArrayList;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Aluno {
-    int numero;
-    String nome;
-    String curso;
-    int anoMatricula;
-    String morada;
-    int telefone;
-    String email;
-    float media;
-    float pontos;
+    static int numero;
+    static String nome;
+    static String curso;
+    static int anoMatricula;
+    static String morada;
+    static int telefone;
+    static String email;
+    static float media;
+    static float pontos;
     static ArrayList<Aluno> alunos = new ArrayList<Aluno>(); // Vai criar uma base de dados de alunos
     //HashMap<Integer, ArrayList<String>> disciplinas = new HashMap<Integer, ArrayList<String>>(); // Vai criar uma base de dados de disciplinas unica para cada aluno (nao posso duplicar o numero)
     //Map<Integer, Map<String, Float>> notas = new HashMap<>(); // Criar uma base de dados de notas para cada alun
@@ -128,5 +129,104 @@ public class Aluno {
 
     public static boolean isAlunoEmpty(){
         return alunos.isEmpty();
+    }
+
+    public static void SaveData(ArrayList<Aluno> alunos) {
+        try {
+            File arquivo = new File("alunos.txt");
+            if (arquivo.exists()) {
+                arquivo.delete();
+            }
+            arquivo.createNewFile();
+
+            FileWriter fileWriter = new FileWriter(arquivo);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            for (Aluno aluno : alunos) {
+                bufferedWriter.write("NO: " + aluno.numero);
+                bufferedWriter.newLine();
+                bufferedWriter.write("NAME: " + aluno.nome);
+                bufferedWriter.newLine();
+                bufferedWriter.write("COURSE: " + aluno.curso);
+                bufferedWriter.newLine();
+                bufferedWriter.write("YEAR: " + aluno.anoMatricula);
+                bufferedWriter.newLine();
+                bufferedWriter.write("ADDRESS: " + aluno.morada);
+                bufferedWriter.newLine();
+                bufferedWriter.write("PHONE: " + aluno.telefone);
+                bufferedWriter.newLine();
+                bufferedWriter.write("EMAIL: " + aluno.email);
+                bufferedWriter.newLine();
+                bufferedWriter.write("AVERAGE: " + aluno.media);
+                bufferedWriter.newLine();
+                bufferedWriter.write("POINTS: " + aluno.pontos);
+                bufferedWriter.newLine();
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+
+            System.out.println("Dados dos alunos salvos com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao guardar dados:\n" + e);
+        }
+    }
+    public static void LoadData() {
+        try {
+            File arquivo = new File("users.txt");
+            if (!arquivo.exists()) {
+                arquivo.createNewFile();
+            }
+
+            if (!arquivo.exists()) {
+                System.out.println("Arquivo de dados de alunos não encontrado.");
+                return;
+            }
+
+            FileReader fileReader = new FileReader(arquivo);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            int no = 0;
+            String name = null;
+            String course = null;
+            int year = 0;
+            String address = null;
+            int phone = 0;
+            String email = null;
+            float average = 0;
+            float points = 0;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.startsWith("NO: ")) {
+                    no = Integer.parseInt(line.substring(4).trim());
+                } else if (line.startsWith("NAME: ")) {
+                    name = line.substring(6).trim();
+                } else if (line.startsWith("COURSE: ")) {
+                    course = line.substring(8).trim();
+                } else if (line.startsWith("YEAR: ")) {
+                    year = Integer.parseInt(line.substring(6).trim());
+                } else if (line.startsWith("ADDRESS: ")) {
+                    address = line.substring(9).trim();
+                } else if (line.startsWith("PHONE: ")) {
+                    phone = Integer.parseInt(line.substring(7).trim());
+                } else if (line.startsWith("EMAIL: ")) {
+                    email = line.substring(7).trim();
+                } else if (line.startsWith("AVERAGE: ")) {
+                    average = Float.parseFloat(line.substring(9).trim());
+                    points = average * 10;
+                } else if (line.isEmpty()) {
+                    // Quando uma linha em branco é encontrada, cria um objeto Aluno e adiciona à lista
+                    Aluno aluno = new Aluno(name, no, course, year, address, phone, email, average);
+                    alunos.add(aluno);
+                }
+            }
+
+            bufferedReader.close();
+
+            System.out.println("Dados dos alunos carregados com sucesso.");
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar dados dos alunos:\n" + e);
+        }
     }
 }
