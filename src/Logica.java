@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Logica {
     Mensagens msn = new Mensagens();
+    Quartos quartos = new Quartos();
     Scanner isScan = new Scanner(System.in);
     public boolean isString(String value){
         return value.matches("[a-zA-Z]+");
@@ -11,7 +12,7 @@ public class Logica {
         return numeroFormatado;
     }
 
-    public boolean isNum(String value){
+    public static boolean isNum(String value){
         try {
             Integer.parseInt(value);
             return true;
@@ -25,8 +26,19 @@ public class Logica {
     }
 
     public boolean isPhone(String value){
-        return value.length() == 9 ? true : false;
+        if(value.length() == 9) {
+            if (value.charAt(0) == '9') {
+                if (value.charAt(1) == '1' || value.charAt(1) == '2' || value.charAt(1) == '3' || value.charAt(1) == '6') {
+                    return true;
+                }else return false;
+                } else if(value.charAt(0) == '2') {
+                if (value.charAt(1) == '3' && value.charAt(2) == '2') {
+                    return true;
+                } return false;
+            } else return false;
+        } else return false;
     }
+
 
     public boolean isYear(String value){
         return value.length() == 4 ? true : false;
@@ -50,10 +62,31 @@ public class Logica {
             msn.menu();
             break;
         case '2':
+            if(Aluno.isAlunoEmpty()){
+                System.out.println("Não existe nenhum aluno na base de dados!");
+                msn.menu();
+                return;
+            }
+            //Candidatura a residencia
+            System.out.println("Insira o número do aluno:");
+            String numero = isScan.nextLine();
+            while (!isNum(numero)) {
+                System.out.println("Número inválido, insira novamente:");
+                numero = isScan.nextLine();
+            }
+            if(Aluno.getAluno(Integer.parseInt(numero)) == null){
+                System.out.println("Número de aluno não existe!");
+                msn.menu();
+                return;
+            }
+            quartos.adicionarquartos(Integer.parseInt(numero));
             //Efetuar Candidatura de residencia (Verificar se pode entrar numa residenecia, e adicionar) ||| feito, adicionarquartos
             break;
         case '3':
             //Atualizar alunos
+            quartos.kuartus.put(1, "Superior");
+            int a = quartos.kuartus.size();
+            System.out.println(a);
             break;
         case '4':
             //Apagar alunos
@@ -95,6 +128,11 @@ public class Logica {
             System.out.println("Número inválido, insira novamente:");
             numero = isScan.nextLine();
         }
+        Aluno.getAluno(Integer.parseInt(numero));
+        if(Aluno.getAluno(Integer.parseInt(numero)) != null){
+            System.out.println("Número de aluno já existe!");
+            msn.menu();
+        }
         System.out.println("Insira o curso do aluno:");
         String curso = isScan.nextLine();
         while (!isString(curso)) {
@@ -123,7 +161,7 @@ public class Logica {
         }
         System.out.println("Insira a média do aluno:");
         Float media = isScan.nextFloat();
-        while (!isFloat(String.valueOf(media))) {
+        while (!isFloat(String.valueOf(media)) || media < 0 || media > 20) {
             System.out.println("Média inválida, insira novamente:");
             media = isScan.nextFloat();
         }
@@ -174,7 +212,7 @@ public class Logica {
             }
             Aluno aluno = Aluno.getAluno(Integer.parseInt(numero));
             if(aluno != null){
-                System.out.println("Número: " + aluno.getNumero());
+                System.out.println("Número: " + formatNumber(aluno.getNumero()));
                 System.out.println("Nome: " + aluno.getNome());
                 System.out.println("Curso: " + aluno.getCurso());
                 System.out.println("Ano de Matrícula: " + aluno.getAnoMatricula());
@@ -184,7 +222,7 @@ public class Logica {
                 System.out.println("Media: " + aluno.getMedia());
                 System.out.println("Pontos: " + aluno.getPontos());
             } else {
-                System.out.println("Numero de aluno não existe");
+                System.out.println("Número do aluno não existe");
             }
         }
     }

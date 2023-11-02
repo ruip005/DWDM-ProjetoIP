@@ -25,7 +25,7 @@ public class Aluno {
         this.telefone = telefone;
         this.email = email;
         this.media = media;
-        this.pontos = pontos;
+        this.pontos = media*10;
         System.out.println("Aluno criado!");
     }
 
@@ -47,11 +47,11 @@ public class Aluno {
     }
 
     public float getPontos() {
-        return media*10;
+        return this.pontos;
     }
 
     public void setPontos(float pontos) {
-        this.pontos = media*10;
+        this.pontos = pontos;
     }
 
     public String getNome() {
