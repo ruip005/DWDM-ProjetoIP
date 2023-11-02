@@ -68,6 +68,8 @@ public class Logica {
             break;
             //Lista de ocupação de quartos ||| feito quartosalocados
         case '7':
+
+            msn.menu();
             break;
             //Eliminar a ocupação de quartos ||| feito, removerquartos
         case '*':
@@ -157,7 +159,7 @@ public class Logica {
         Aluno aluno = Aluno.getAluno(Integer.parseInt(numero));
         msn.printAluno(aluno);
     }
-    private void showAluno(){
+    public void showAluno(){
 
         boolean existe = !Aluno.isAlunoEmpty();
         if(!existe){

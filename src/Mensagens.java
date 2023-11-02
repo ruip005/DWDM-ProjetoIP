@@ -44,7 +44,7 @@ public class Mensagens {
 
     public static void printAluno(Aluno aluno){
         System.out.println("#######################################");
-        alunos.print(aluno);
+        System.out.print(aluno);
         System.out.println("#######################################");
     }
 }

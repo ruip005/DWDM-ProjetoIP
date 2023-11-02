@@ -50,14 +50,14 @@ public class Quartos {
 
 
     //CASO 6
-    public void quartosalocados() {
+    private void quartosalocados() {
         System.out.println("Quantidade de quartos básicos alocados: " + basico);
         System.out.println("Quantidade de quartos superiores alocados: " + superior);
     }
 
 
     //CASO 7
-    public void removerlocados() {
+    private void removerlocados() {
         char caso;
 
         do {
