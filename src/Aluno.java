@@ -1,8 +1,5 @@
-import java.util.ArrayList;
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Aluno {
     int numero;
@@ -15,9 +12,10 @@ public class Aluno {
     float media;
     float pontos;
     static ArrayList<Aluno> alunos = new ArrayList<Aluno>(); // Vai criar uma base de dados de alunos
+
     //HashMap<Integer, ArrayList<String>> disciplinas = new HashMap<Integer, ArrayList<String>>(); // Vai criar uma base de dados de disciplinas unica para cada aluno (nao posso duplicar o numero)
     //Map<Integer, Map<String, Float>> notas = new HashMap<>(); // Criar uma base de dados de notas para cada alun
-    public Aluno(String nome, int numero, String curso, int anoMatricula, String morada, int telefone, String email,float media) {
+    public Aluno(String nome, int numero, String curso, int anoMatricula, String morada, int telefone, String email, float media) {
         this.nome = nome;
         this.numero = numero;
         this.curso = curso;
@@ -26,7 +24,7 @@ public class Aluno {
         this.telefone = telefone;
         this.email = email;
         this.media = media;
-        this.pontos = media*10;
+        this.pontos = media * 10;
         //System.out.println("Aluno criado!");
     }
 
@@ -103,16 +101,16 @@ public class Aluno {
         this.email = email;
     }
 
-    public static void addAluno(Aluno student){
+    public static void addAluno(Aluno student) {
         alunos.add(student);
     }
 
-    public static void delAluno(int numero){
+    public static void delAluno(int numero) {
         for (int i = 0; i < alunos.size(); i++) {
-            if (alunos.get(i).getNumero() == numero){
+            if (alunos.get(i).getNumero() == numero) {
                 alunos.remove(i);
                 System.out.println("Aluno apagado!");
-                return ;
+                return;
             }
         }
         System.out.println("Aluno não encontrado!");
@@ -127,7 +125,7 @@ public class Aluno {
         return null;
     }
 
-    public static boolean isAlunoEmpty(){
+    public static boolean isAlunoEmpty() {
         return alunos.isEmpty();
     }
 
@@ -172,6 +170,7 @@ public class Aluno {
             System.out.println("Erro ao guardar dados:\n" + e);
         }
     }
+
     public static void LoadData() {
         try {
             File arquivo = new File("users.txt");

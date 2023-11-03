@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class SistemaPontos {
@@ -106,7 +105,9 @@ public class SistemaPontos {
                     }
                 }
 
-}}}
+        }
+    }
+}
 
 
 
