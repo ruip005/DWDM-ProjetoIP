@@ -32,7 +32,7 @@ public class SistemaPontos {
                     System.out.println("2- Lavandaria (2 pontos)           ");
                     System.out.println("3- Limpeza de Quartos (5 pontos)             ");
                     System.out.println("4- Televisão por cabo ou canais especiais (8 pontos) ");
-                    System.out.println("6-Sair");
+                    System.out.println("5-Sair");
                     String pontosAdicionar = iscan.nextLine();
                     while (!Logica.isNum(pontosAdicionar)) {
                         System.out.println("Número inválido, insira novamente:");
@@ -55,7 +55,7 @@ public class SistemaPontos {
                             aluno.setPontos(aluno.getPontos() - 8);
                             System.out.println("Pontos Removidos com sucesso. Pontos totais: " + aluno.getPontos());
                             break;
-                        case '6':
+                        case '5':
                             msg.menu();
                         default:
                             System.out.println("Opção Invalida");
@@ -84,17 +84,21 @@ public class SistemaPontos {
 
                             break;
                         case '2':
-                            aluno.setPontos(aluno.getPontos() + 2);
+                            aluno.setPontos(aluno.getPontos() + 5);
                             System.out.println("Pontos adicionados com sucesso. Pontos totais: " + aluno.getPontos());
 
 
                             break;
                         case '3':
-                            aluno.setPontos(aluno.getPontos() + 5);
+                            aluno.setPontos(aluno.getPontos() + 2);
                             System.out.println("Pontos adicionados com sucesso. Pontos totais: " + aluno.getPontos());
                             break;
                         case '4':
-                            aluno.setPontos(aluno.getPontos() + 8);
+                            aluno.setPontos(aluno.getPontos() + 4);
+                            System.out.println("Pontos adicionados com sucesso. Pontos totais: " + aluno.getPontos());
+                            break;
+                        case '5':
+                            aluno.setPontos(aluno.getPontos() + 4);
                             System.out.println("Pontos adicionados com sucesso. Pontos totais: " + aluno.getPontos());
                             break;
                         case '6':
