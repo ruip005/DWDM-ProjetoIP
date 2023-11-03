@@ -79,7 +79,7 @@ public class SistemaPontos {
                     }
                     switch (pontosRemover.charAt(0)) {
                         case '1':
-                            aluno.setPontos(aluno.getPontos() + 3);
+                            aluno.setPontos(aluno.getPontos() + 6);
                             System.out.println("Pontos adicionados com sucesso. Pontos totais: " + aluno.getPontos());
 
                             break;

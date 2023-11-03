@@ -214,11 +214,13 @@ public class Aluno {
                     email = line.substring(7).trim();
                 } else if (line.startsWith("AVERAGE: ")) {
                     average = Float.parseFloat(line.substring(9).trim());
-                    points = average * 10;
+                } else if (line.startsWith("POINTS: ")) {
+                    points = Float.parseFloat(line.substring(8).trim());
                 } else if (line.isEmpty()) {
                     // Quando uma linha em branco é encontrada, cria um objeto Aluno e adiciona à lista
                     Aluno aluno = new Aluno(name, no, course, year, address, phone, email, average);
                     alunos.add(aluno);
+                    aluno.setPontos(points);
                 }
             }
 
