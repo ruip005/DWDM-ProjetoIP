@@ -54,11 +54,12 @@ public class Logica {
         }
     }
 
-    public void Logica(int op) {
+    public void Logica(char op) {
     switch (op) {
         case '1':
             //Inserir e Adicionar aluno
             addStudent();
+
             // Chamar menu
             msn.menu();
             break;
@@ -109,12 +110,19 @@ public class Logica {
             break;
             //Lista de ocupação de quartos ||| feito quartosalocados
         case '7':
-
-            msn.menu();
+            // to do - atualizar ocupação de quartos
+            System.out.println("Insira o número do aluno:");
+            String numeroAluno2 = isScan.nextLine();
+            while (!isNum(numeroAluno2)) {
+                System.out.println("Número inválido, insira novamente:");
+                numeroAluno2 = isScan.nextLine();
+            }
+            quartos.updateRooms(Integer.parseInt(numeroAluno2));
+            //msn.menu();
             break;
             //Eliminar a ocupação de quartos ||| feito, removerquartos
         case '8':
-            Aluno.SaveData(Aluno.alunos);
+            Aluno.SaveData();
             quartos.SaveData();
             msn.menu();
             break;
@@ -138,7 +146,7 @@ public class Logica {
         }
         System.out.println("Insira o número do aluno:");
         String numero = isScan.nextLine();
-        while (!isNum(numero)) {
+        while (!isNum(numero) || numero.length() > 4 ) {
             System.out.println("Número inválido, insira novamente:");
             numero = isScan.nextLine();
         }

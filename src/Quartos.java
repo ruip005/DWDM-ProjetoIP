@@ -97,8 +97,8 @@ public class Quartos {
     }
 
         public void listarQuartos() {
-            System.out.println("Quartos básicos ocupados: " + qtdBasciso() +" /40");
-            System.out.println("Quartos superiores ocupados: " + qtdSup() +" /15");
+            System.out.println("Quartos básicos ocupados: " + qtdBasciso() +"/40");
+            System.out.println("Quartos superiores ocupados: " + qtdSup() +"/15");
             msg.menu();
         }
 
@@ -116,54 +116,83 @@ public class Quartos {
             } else System.out.println(quarto.equals("Basico") ? "Quarto básico" : "Quarto superior");
         }
 
-        //CASO 7
-        private void removerlocados () {
-            char caso;
-
-            do {
-                System.out.println("Escolha a categoria de quartos que deseja remover:");
-                System.out.println("1- Quartos Básicos");
-                System.out.println("2- Quartos Superiores");
-                System.out.println("*- Sair");
-
-                caso = isScan.next().charAt(0);
-
-                switch (caso) {
-                    case '1':
-                        System.out.println("Insira o número de quartos que deseja remover:");
-                        int rbas = isScan.nextInt();
-                        if (rbas <= qtdBasciso()) {
-                            //qtd -= rbas; to do - remover quartos
-                            System.out.println("Número de quartos básicos alocados agora é: " + qtdBasciso());
-                            msg.menu();
-                        } else {
-                            System.out.println("Removeu mais quartos básicos do que o disponível.");
-                            msg.menu();
-                        }
-                        break;
-
-                    case '2':
-                        System.out.println("Insira o número de quartos que deseja remover:");
-                        int rsup = isScan.nextInt();
-                        if (rsup <= qtdSup()) {
-                            //superior -= rsup; to do - remover quartos
-                            System.out.println("Número de quartos superiores alocados agora é: " + qtdSup());
-                            msg.menu();
-                        } else {
-                            System.out.println("Removeu mais quartos superiores do que o disponível.");
-                            msg.menu();
-                        }
-                        break;
-
-                    case '*':
+        public void updateRooms(int alunoNo){
+            Aluno aluno = Aluno.getAluno(alunoNo);
+            if (aluno == null) {
+                System.out.println("Aluno não encontrado.");
+                return;
+            }
+            boolean haveRoom = alreadyQuarto(alunoNo) ? true : false;
+            if(!haveRoom){
+                System.out.println("Aluno não tem quarto.");
+                return;
+            }
+            boolean isBasic = kuartus.get(alunoNo).equals("Basico") ? true : false;
+            System.out.println("O aluno tem " + aluno.getPontos() + " pontos.");
+            System.out.println(" 1- Apagar o quarto");
+            System.out.println(" 2- Quarto básico");
+            System.out.println(" 3- Quarto superior");
+            System.out.println(" 0- Sair");
+            String escolhaQuarto = isScan.nextLine(); // to do - verificar se é numero
+            while (!Logica.isNum(escolhaQuarto)) {
+                System.out.println("Número inválido, insira novamente:");
+                escolhaQuarto = isScan.nextLine();
+            }
+            switch (escolhaQuarto.charAt(0)) {
+                case '1':
+                    kuartus.remove(alunoNo);
+                    if(isBasic) aluno.setPontos(aluno.getPontos() + 110);
+                    else aluno.setPontos(aluno.getPontos() + 140);
+                    System.out.println("Quarto removido e pontos reembolsados.");
+                    break;
+                case '2':
+                    if (isBasic) {
+                        System.out.println("Já possui um quarto básico");
                         msg.menu();
-                        break;
-
-                    default:
-                        System.out.println("Opção inválida. Tente novamente.");
+                        return;
+                    }
+                    if (qtdBasciso() >= 40) {
+                        System.out.println("Não há quartos básicos disponíveis.");
                         msg.menu();
-                }
-            } while (caso != '*');
+                    } else if (aluno.getPontos() > 110) {
+                        kuartus.put(alunoNo, "Basico");
+                        //qtdBasciso();
+                        System.out.println("Quarto básico alocado.");
+                        aluno.setPontos(aluno.getPontos() - 110);
+                        msg.menu();
+                    } else {
+                        System.out.println("Pontos insuficientes para um quarto básico.");
+                        msg.menu();
+                    }
+                    break;
+                case '3':
+                    if (!isBasic) {
+                        System.out.println("Já possui um quarto superior");
+                        msg.menu();
+                        return;
+                    }
+                    if (qtdSup() >= 15) {
+                        System.out.println("Não há quartos superiores disponíveis.");
+                        msg.menu();
+                    } else if (aluno.getPontos() > 140) {
+                        kuartus.put(alunoNo, "Superior");
+                        System.out.println("Quarto superior alocado.");
+                        aluno.setPontos(aluno.getPontos() - 140);
+                        msg.menu();
+                    } else {
+                        System.out.println("Pontos insuficientes para um quarto superior.");
+                        msg.menu();
+                    }
+                    break;
+                case '0':
+                    msg.menu();
+                    break;
+                default:
+                    System.out.println("Escolha inválida.");
+                    msg.menu();
+                    break;
+            }
+
         }
 
     //Save

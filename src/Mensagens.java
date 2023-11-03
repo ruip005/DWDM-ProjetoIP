@@ -37,7 +37,11 @@ public class Mensagens {
 
             Logica log = new Logica();
             String caso = isScan.nextLine();
-            if (log.isNum(caso)) {
+            caso = String.valueOf(caso.charAt(0));
+            if (caso.equals("*")) {
+                System.out.println("A sair...");
+                System.exit(0);
+            } else if (Logica.isNum(caso)) {
                 log.Logica(caso.charAt(0));
             } else {
                 System.out.println("Opção inválida");

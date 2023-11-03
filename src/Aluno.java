@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Aluno {
-    static int numero;
-    static String nome;
-    static String curso;
-    static int anoMatricula;
-    static String morada;
-    static int telefone;
-    static String email;
-    static float media;
-    static float pontos;
+    int numero;
+    String nome;
+    String curso;
+    int anoMatricula;
+    String morada;
+    int telefone;
+    String email;
+    float media;
+    float pontos;
     static ArrayList<Aluno> alunos = new ArrayList<Aluno>(); // Vai criar uma base de dados de alunos
     //HashMap<Integer, ArrayList<String>> disciplinas = new HashMap<Integer, ArrayList<String>>(); // Vai criar uma base de dados de disciplinas unica para cada aluno (nao posso duplicar o numero)
     //Map<Integer, Map<String, Float>> notas = new HashMap<>(); // Criar uma base de dados de notas para cada alun
@@ -27,7 +27,7 @@ public class Aluno {
         this.email = email;
         this.media = media;
         this.pontos = media*10;
-        System.out.println("Aluno criado!");
+        //System.out.println("Aluno criado!");
     }
 
 
@@ -131,9 +131,9 @@ public class Aluno {
         return alunos.isEmpty();
     }
 
-    public static void SaveData(ArrayList<Aluno> alunos) {
+    public static void SaveData() {
         try {
-            File arquivo = new File("alunos.txt");
+            File arquivo = new File("users.txt");
             if (arquivo.exists()) {
                 arquivo.delete();
             }
@@ -142,24 +142,25 @@ public class Aluno {
             FileWriter fileWriter = new FileWriter(arquivo);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            for (Aluno aluno : alunos) {
-                bufferedWriter.write("NO: " + aluno.numero);
+            for (int i = 0; i < alunos.size(); i++) {
+                Aluno aluno = alunos.get(i);
+                bufferedWriter.write("NO: " + aluno.getNumero());
                 bufferedWriter.newLine();
-                bufferedWriter.write("NAME: " + aluno.nome);
+                bufferedWriter.write("NAME: " + aluno.getNome());
                 bufferedWriter.newLine();
-                bufferedWriter.write("COURSE: " + aluno.curso);
+                bufferedWriter.write("COURSE: " + aluno.getCurso());
                 bufferedWriter.newLine();
-                bufferedWriter.write("YEAR: " + aluno.anoMatricula);
+                bufferedWriter.write("YEAR: " + aluno.getAnoMatricula());
                 bufferedWriter.newLine();
-                bufferedWriter.write("ADDRESS: " + aluno.morada);
+                bufferedWriter.write("ADDRESS: " + aluno.getMorada());
                 bufferedWriter.newLine();
-                bufferedWriter.write("PHONE: " + aluno.telefone);
+                bufferedWriter.write("PHONE: " + aluno.getTelefone());
                 bufferedWriter.newLine();
-                bufferedWriter.write("EMAIL: " + aluno.email);
+                bufferedWriter.write("EMAIL: " + aluno.getEmail());
                 bufferedWriter.newLine();
-                bufferedWriter.write("AVERAGE: " + aluno.media);
+                bufferedWriter.write("AVERAGE: " + aluno.getMedia());
                 bufferedWriter.newLine();
-                bufferedWriter.write("POINTS: " + aluno.pontos);
+                bufferedWriter.write("POINTS: " + aluno.getPontos());
                 bufferedWriter.newLine();
                 bufferedWriter.newLine();
             }
