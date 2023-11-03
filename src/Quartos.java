@@ -127,7 +127,8 @@ public class Quartos {
         }
         boolean haveRoom = alreadyQuarto(alunoNo) ? true : false;
         if (!haveRoom) {
-            System.out.println("Aluno não tem quarto.");
+            //System.out.println("Aluno não tem quarto.");
+            msg.menu();
             return;
         }
         boolean isBasic = kuartus.get(alunoNo).equals("Basico") ? true : false;
