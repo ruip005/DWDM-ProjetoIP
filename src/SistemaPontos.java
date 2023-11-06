@@ -40,18 +40,34 @@ public class SistemaPontos {
                     }
                     switch (pontosAdicionar.charAt(0)) {
                         case '1':
+                            if (aluno.getPontos() < 3) {
+                                System.out.println("Pontos insuficientes");
+                                break;
+                            }
                             aluno.setPontos(aluno.getPontos() - 3);
                             System.out.println("Pontos Removidos com sucesso. Pontos totais: " + aluno.getPontos());
                             break;
                         case '2':
+                            if (aluno.getPontos() < 2) {
+                                System.out.println("Pontos insuficientes");
+                                break;
+                            }
                             aluno.setPontos(aluno.getPontos() - 2);
                             System.out.println("Pontos Removidos com sucesso. Pontos totais: " + aluno.getPontos());
                             break;
                         case '3':
+                            if (aluno.getPontos() < 5) {
+                                System.out.println("Pontos insuficientes");
+                                break;
+                            }
                             aluno.setPontos(aluno.getPontos() - 5);
                             System.out.println("Pontos Removidos com sucesso. Pontos totais: " + aluno.getPontos());
                             break;
                         case '4':
+                            if (aluno.getPontos() < 8) {
+                                System.out.println("Pontos insuficientes");
+                                break;
+                            }
                             aluno.setPontos(aluno.getPontos() - 8);
                             System.out.println("Pontos Removidos com sucesso. Pontos totais: " + aluno.getPontos());
                             break;

@@ -30,7 +30,7 @@ public class Quartos {
         return value;
     }
 
-    public boolean alreadyQuarto(int numeroAluno) {
+    public static boolean alreadyQuarto(int numeroAluno) {
         Aluno aluno = Aluno.getAluno(numeroAluno);
         String quarto = kuartus.get(numeroAluno);
         if (quarto == null) {

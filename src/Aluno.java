@@ -109,6 +109,9 @@ public class Aluno {
         for (int i = 0; i < alunos.size(); i++) {
             if (alunos.get(i).getNumero() == numero) {
                 alunos.remove(i);
+                if (Quartos.alreadyQuarto(numero)) {
+                    Quartos.kuartus.remove(numero);
+                }
                 System.out.println("Aluno apagado!");
                 return;
             }
